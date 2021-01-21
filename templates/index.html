@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Page Title</title>
+		<style>
+			h1 {
+				margin: auto;
+    			width: 32%;
+			}
+			.container {
+				padding: 20px;
+			}
+			.row{
+				margin: auto;
+			    width: 50%;
+			    border: 3px solid green;
+			    padding: 10px;
+			    text-align: center;
+			}
+			.col-md-12 {
+				margin: 10px
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+
+	<body>
+
+	<h1>Detect Sentiment Of Sentense</h1>
+	<div class="container">
+		<div class="row pd-10">
+			<div class="col-md-12">
+				<textarea id="input_text" name="input_text" rows="4" cols="50"></textarea>
+			</div>
+			<div class="col-md-12">
+				<span id="Result">Result</span>
+			</div>
+			<div class="col-md-12">
+				<input type="submit" id="submit" value="Submit"/>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
+
+<script>
+	$(document).ready(function(){
+		$("body").on("click","#submit",function(){
+			let text = $("#input_text").val();
+		 	if(text == undefined || text == null || text == ""){
+		 		alert("Please add Text to PREDICT!!!!");
+		 		return;
+		 	}
+		 	$.post("http://127.0.0.1:5000/predict", {
+		 		input_text: text
+		 	},function(e){
+				$("#Result").text(e)
+		 	})
+		 })
+	})
+</script>
